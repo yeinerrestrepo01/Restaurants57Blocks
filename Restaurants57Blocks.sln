@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants57Blocks.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants57Blocks.Domain", "Restaurants57Blocks.Domain\Restaurants57Blocks.Domain.csproj", "{6EF9FBE0-921A-4D65-BB16-9EA257CB2104}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurants57Blocks.Common", "Restaurants57Blocks.Common\Restaurants57Blocks.Common.csproj", "{B5423000-2B2D-48DD-8512-FEEB3E50F736}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6EF9FBE0-921A-4D65-BB16-9EA257CB2104}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF9FBE0-921A-4D65-BB16-9EA257CB2104}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF9FBE0-921A-4D65-BB16-9EA257CB2104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5423000-2B2D-48DD-8512-FEEB3E50F736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5423000-2B2D-48DD-8512-FEEB3E50F736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5423000-2B2D-48DD-8512-FEEB3E50F736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5423000-2B2D-48DD-8512-FEEB3E50F736}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Restaurants57Blocks.Api.Middleware;
 using Restaurants57Blocks.Infrastructure.DBContext;
 
 namespace Restaurants57Blocks.Api
@@ -35,6 +36,7 @@ namespace Restaurants57Blocks.Api
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<Restaurants57BlocksDBContext>(options => options.UseSqlServer(connection));
             #region Register (dependency injection)
+            IoC.AddDependency(services);
             #endregion
             services.AddControllers();
             // Configuración FluentValidator
