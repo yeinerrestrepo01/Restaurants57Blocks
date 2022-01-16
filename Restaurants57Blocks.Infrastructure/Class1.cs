@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Restaurants57Blocks.Domain
+namespace Restaurants57Blocks.Infrastructure
 {
     public class Class1
     {
