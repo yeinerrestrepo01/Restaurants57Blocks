@@ -23,6 +23,7 @@ namespace Restaurants57Blocks.Infrastructure.DBContext
 
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Restaurant> Restaurant { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
