@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Restaurants57Blocks.Domain.Entities
 {
@@ -16,5 +17,9 @@ namespace Restaurants57Blocks.Domain.Entities
         public string Password { get; set; }
         public DateTime DateRegister { get; set; }
         public bool Status { get; set; } = true;
+        public int RestaurantId { get; set; }
+
+        [ForeignKey("RestaurantId")]
+        public virtual Restaurant RestaurantNavegation { get; set; }
     }
 }
