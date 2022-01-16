@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Restaurants57Blocks.Infrastructure.DBContext;
 
 namespace Restaurants57Blocks.Api
 {
@@ -28,9 +31,14 @@ namespace Restaurants57Blocks.Api
                   "asociados a 57Blocks"
                 });
             });
+
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<Restaurants57BlocksDBContext>(options => options.UseSqlServer(connection));
             #region Register (dependency injection)
             #endregion
             services.AddControllers();
+            // Configuración FluentValidator
+            services.AddMvc().AddFluentValidation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
