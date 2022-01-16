@@ -2,6 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Restaurants57Blocks.Domain.FluentValidation;
 using Restaurants57Blocks.Domain.Request;
+using Restaurants57Blocks.Infrastructure.GenericRepository;
+using Restaurants57Blocks.Infrastructure.Repository;
+using Restaurants57Blocks.Infrastructure.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +23,8 @@ namespace Restaurants57Blocks.Api.Middleware
         {
             // Infrastructure
             #region Infrastructure
+            services.AddTransient<IUnitOfwork, UnitOfwork>();
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             #endregion
 
             //Services
@@ -27,6 +32,7 @@ namespace Restaurants57Blocks.Api.Middleware
             #endregion
 
             #region Repository
+            services.AddTransient<IUserRepository, UserRepository>();
             #endregion
 
             #region FluentValidator

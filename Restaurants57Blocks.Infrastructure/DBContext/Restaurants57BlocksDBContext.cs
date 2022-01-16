@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restaurants57Blocks.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Restaurants57Blocks.Infrastructure.DBContext
 {
