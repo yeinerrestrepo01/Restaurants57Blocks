@@ -6,23 +6,26 @@ using System.Text;
 
 namespace Restaurants57Blocks.Common.Security
 {
+    /// <summary>
+    /// clase para manejo de seguridad 
+    /// </summary>
     public  class SecurityManager
     {
         static readonly string password = "P455W0rd";
 
         /// <summary>
-        /// 
+        /// Metodo encargado de cifrar la informacion enviada en SHA512
         /// </summary>
         /// <param name="plainText"></param>
         /// <returns></returns>
-        public static string EncryptSHA512(string plainText)
+        public static string EncryptSHA512(string informatio)
         {
-            if (plainText == null)
+            if (informatio == null)
             {
                 return null;
             }
             // Get the bytes of the string
-            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
+            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(informatio);
             var passwordBytes = Encoding.UTF8.GetBytes(password);
 
             // Hash the password with SHA256
