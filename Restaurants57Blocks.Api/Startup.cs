@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Restaurants57Blocks.Api.Middleware;
 using Restaurants57Blocks.Infrastructure.DBContext;
+using System;
 
 namespace Restaurants57Blocks.Api
 {
@@ -38,7 +39,7 @@ namespace Restaurants57Blocks.Api
             #region Register (dependency injection)
             IoC.AddDependency(services);
             #endregion
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             // Configuración FluentValidator
             services.AddMvc().AddFluentValidation();

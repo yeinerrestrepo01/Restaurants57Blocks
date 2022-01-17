@@ -29,6 +29,11 @@ namespace Restaurants57Blocks.Application.Implementation
         {
             _mapper = mapper;
             _restaurantRepository = restaurantRepository;
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<RestaurantRequest, Restaurant>();
+                _ = cfg.CreateMap<Restaurant, RestaurantDto>();
+            });
+            _mapper = config.CreateMapper();
         }
 
         /// <summary>
@@ -38,17 +43,17 @@ namespace Restaurants57Blocks.Application.Implementation
         /// <returns></returns>
         public async Task<ResponseDto<bool>> AddAsync(RestaurantRequest restaurant)
         {
-            var restaurantEntity = _mapper.Map<Restaurant>(restaurant);
+            var restaurantEntity = _mapper.Map<RestaurantRequest,Restaurant>(restaurant);
             var ResultAddOwner = await _restaurantRepository.AddAsync(restaurantEntity);
             var Response = new ResponseDto<bool>();
             if (ResultAddOwner.Equals(0))
             {
                 Response.StatusCode = 202;
-                Response.Message = Message.Registro_No_Exitoso;
+                Response.Message = Message.Error_Proccess;
             }
             else
             {
-                Response.Message = Message.Registro_No_Exitoso;
+                Response.Message = Message.Successful_Register;
                 Response.Data = true;
                 Response.IsSuccess = true;
             }
