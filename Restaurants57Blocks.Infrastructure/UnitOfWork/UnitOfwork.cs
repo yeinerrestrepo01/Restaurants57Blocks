@@ -18,6 +18,8 @@ namespace Restaurants57Blocks.Infrastructure.UnitOfWork
         private Repository<User> RepositoryUser;
         
         private Repository<Restaurant> RepositoryRestaurant;
+
+        private Repository<Employee> RepositoryEmployee;
         public UnitOfwork(Restaurants57BlocksDBContext restaurants57BlocksDBContext)
         {
             _restaurants57BlocksDBContext = restaurants57BlocksDBContext;
@@ -50,6 +52,21 @@ namespace Restaurants57Blocks.Infrastructure.UnitOfWork
                 return RepositoryRestaurant;
             }
         }
+
+        /// <summary>
+        /// Unidad de trabajo Repository<Employee> 
+        /// </summary>
+        public Repository<Employee> Employee
+        {
+            get
+            {
+                if (RepositoryEmployee == null)
+                    RepositoryEmployee = new Repository<Employee>(_restaurants57BlocksDBContext);
+
+                return RepositoryEmployee;
+            }
+        }
+
 
         public int Save() => _restaurants57BlocksDBContext.SaveChanges();
         public async Task<int> SaveAsync() => await _restaurants57BlocksDBContext.SaveChangesAsync();

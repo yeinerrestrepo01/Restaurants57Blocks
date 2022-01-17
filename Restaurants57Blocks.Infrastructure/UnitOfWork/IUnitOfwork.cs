@@ -8,6 +8,7 @@ namespace Restaurants57Blocks.Infrastructure.UnitOfWork
     {
         Repository<User> User { get; }
         Repository<Restaurant> Restaurant { get; }
+        Repository<Employee> Employee { get; }
         void Dispose();
         int Save();
         Task<int> SaveAsync();
