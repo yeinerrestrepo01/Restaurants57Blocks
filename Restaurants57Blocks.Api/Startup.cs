@@ -38,6 +38,7 @@ namespace Restaurants57Blocks.Api
             #region Register (dependency injection)
             IoC.AddDependency(services);
             #endregion
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             // Configuración FluentValidator
             services.AddMvc().AddFluentValidation();

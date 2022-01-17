@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Restaurants57Blocks.Application;
+using Restaurants57Blocks.Application.Implementation;
 using Restaurants57Blocks.Domain.FluentValidation;
 using Restaurants57Blocks.Domain.Request;
 using Restaurants57Blocks.Infrastructure.GenericRepository;
+using Restaurants57Blocks.Infrastructure.GenericRepository.Implementation;
 using Restaurants57Blocks.Infrastructure.Repository;
 using Restaurants57Blocks.Infrastructure.UnitOfWork;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Restaurants57Blocks.Api.Middleware
 {
@@ -29,10 +28,12 @@ namespace Restaurants57Blocks.Api.Middleware
 
             //Services
             #region Services
+            services.AddTransient<IRestaurantServices, RestaurantServices>();
             #endregion
 
             #region Repository
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRestaurantRepository, RestaurantRepository>();
             #endregion
 
             #region FluentValidator

@@ -16,13 +16,15 @@ namespace Restaurants57Blocks.Infrastructure.UnitOfWork
         private readonly Restaurants57BlocksDBContext _restaurants57BlocksDBContext;
 
         private Repository<User> RepositoryUser;
+        
+        private Repository<Restaurant> RepositoryRestaurant;
         public UnitOfwork(Restaurants57BlocksDBContext restaurants57BlocksDBContext)
         {
             _restaurants57BlocksDBContext = restaurants57BlocksDBContext;
         }
 
         /// <summary>
-        /// Unidad de trabajo Repository<Owner> 
+        /// Unidad de trabajo Repository<User> 
         /// </summary>
         public Repository<User> User
         {
@@ -32,6 +34,20 @@ namespace Restaurants57Blocks.Infrastructure.UnitOfWork
                     RepositoryUser = new Repository<User>(_restaurants57BlocksDBContext);
 
                 return RepositoryUser;
+            }
+        }
+
+        /// <summary>
+        /// Unidad de trabajo Repository<Restaurant> 
+        /// </summary>
+        public Repository<Restaurant> Restaurant
+        {
+            get
+            {
+                if (RepositoryRestaurant == null)
+                    RepositoryRestaurant = new Repository<Restaurant>(_restaurants57BlocksDBContext);
+
+                return RepositoryRestaurant;
             }
         }
 

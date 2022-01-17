@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaurants57Blocks.Infrastructure.GenericRepository
+namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
 {
     public class UserRepository : IUserRepository
     {
