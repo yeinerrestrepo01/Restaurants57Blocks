@@ -8,10 +8,10 @@ namespace Restaurants57Blocks.Domain.FluentValidation
     { 
         public RestaurantValidator()
         {
-               RuleFor(restaurant => restaurant.Identifcation)
-               .NotEmpty()
-               .NotNull()
-               .WithMessage(Message.Not_Empty_Identification);
+            RuleFor(restaurant => restaurant.Identifcation)
+            .NotEmpty()
+            .NotNull()
+            .WithMessage(Message.Not_Empty_Identification);
 
             RuleFor(restaurant => restaurant.Name)
             .NotEmpty()
@@ -22,6 +22,7 @@ namespace Restaurants57Blocks.Domain.FluentValidation
              .NotEmpty()
              .NotNull()
              .WithMessage(Message.Not_Empty_Address);
+
         }
     }
 }

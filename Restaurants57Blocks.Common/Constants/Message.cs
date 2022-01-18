@@ -26,9 +26,11 @@ namespace Restaurants57Blocks.Common.Constants
 
         public const string Successful_Query = "Consulta realizada con exito";
 
-        public const string Error_Proccess = "Consulta realizada con exito";
+        public const string Error_Proccess = "No se pudo realizar le proceso de manera exitosa";
 
         public const string Not_Information = "No existe informacion relacionada con la consulta que intenta realizar";
+
+        public const string Not_Information_Restaurant = "No existe informacion relacionada con restaurante ingresado";
 
     }
 }

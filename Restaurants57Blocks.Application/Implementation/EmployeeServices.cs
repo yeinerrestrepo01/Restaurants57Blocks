@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
+using Restaurants57Blocks.Application.Validations;
 using Restaurants57Blocks.Common.Constants;
 using Restaurants57Blocks.Domain.Dto;
 using Restaurants57Blocks.Domain.Entities;
 using Restaurants57Blocks.Domain.Request;
 using Restaurants57Blocks.Infrastructure.GenericRepository;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Restaurants57Blocks.Application.Implementation
@@ -20,15 +19,20 @@ namespace Restaurants57Blocks.Application.Implementation
 
         private readonly IEmployeeRepository _employeeRepository;
 
+        private readonly RestaurantValidation _restaurantValitaions;
+
         /// <summary>
         /// Inincializador de clase <class>RestaurantServices</class>
         /// </summary>
         /// <param name="mapper"></param>
         /// <param name="restaurantRepository"></param>
-        public EmployeeServices(IMapper mapper, IEmployeeRepository employeeRepository)
+        public EmployeeServices(IMapper mapper,
+            IEmployeeRepository employeeRepository,
+            IRestaurantRepository restaurantRepository)
         {
             _mapper = mapper;
             _employeeRepository = employeeRepository;
+            _restaurantValitaions = new RestaurantValidation(restaurantRepository);
             var config = new MapperConfiguration(cfg => {
                 cfg.CreateMap<EmployeeRequest, Employee>();
                 _ = cfg.CreateMap<Employee, EmployeeDto>();
@@ -43,20 +47,32 @@ namespace Restaurants57Blocks.Application.Implementation
         /// <returns></returns>
         public async Task<ResponseDto<bool>> AddAsync(EmployeeRequest employee)
         {
-            var employeeEntity = _mapper.Map<EmployeeRequest, Employee>(employee);
-            var ResultAddemployee = await _employeeRepository.AddAsync(employeeEntity);
             var Response = new ResponseDto<bool>();
-            if (ResultAddemployee.Equals(0))
+            if (_restaurantValitaions.ExistsRestaurant(employee.RestaurantId, ref _restaurantValitaions._messageValidation))
             {
-                Response.StatusCode = 202;
-                Response.Message = Message.Error_Proccess;
+                var employeeEntity = _mapper.Map<EmployeeRequest, Employee>(employee);
+                var ResultAddemployee = await _employeeRepository.AddAsync(employeeEntity);
+                
+                if (ResultAddemployee.Equals(0))
+                {
+                    Response.StatusCode = 202;
+                    Response.Message = Message.Error_Proccess;
+                }
+                else
+                {
+                    Response.Message = Message.Successful_Register;
+                    Response.Data = true;
+                    Response.IsSuccess = true;
+                }
             }
             else
             {
-                Response.Message = Message.Successful_Register;
-                Response.Data = true;
+                Response.StatusCode = 202;
+                Response.Message = _restaurantValitaions._messageValidation;
+                Response.Data = false;
                 Response.IsSuccess = true;
             }
+            
             return Response;
         }
 
@@ -75,7 +91,7 @@ namespace Restaurants57Blocks.Application.Implementation
         /// </summary>
         /// <param name="idEmployee"></param>
         /// <returns></returns>
-        public ResponseDto<EmployeeDto> GetById(int idEmployee)
+        public ResponseDto<EmployeeDto> GetById(string idEmployee)
         {
             var Response = new ResponseDto<EmployeeDto>();
             var GetEntity = _employeeRepository.GetById(idEmployee);

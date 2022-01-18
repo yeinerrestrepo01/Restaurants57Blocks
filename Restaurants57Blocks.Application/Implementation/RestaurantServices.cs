@@ -44,9 +44,9 @@ namespace Restaurants57Blocks.Application.Implementation
         public async Task<ResponseDto<bool>> AddAsync(RestaurantRequest restaurant)
         {
             var restaurantEntity = _mapper.Map<RestaurantRequest,Restaurant>(restaurant);
-            var ResultAddOwner = await _restaurantRepository.AddAsync(restaurantEntity);
+            var ResultRestaurant = await _restaurantRepository.AddAsync(restaurantEntity);
             var Response = new ResponseDto<bool>();
-            if (ResultAddOwner.Equals(0))
+            if (ResultRestaurant.Equals(0))
             {
                 Response.StatusCode = 202;
                 Response.Message = Message.Error_Proccess;
@@ -75,7 +75,7 @@ namespace Restaurants57Blocks.Application.Implementation
         /// </summary>
         /// <param name="idRestaurant"></param>
         /// <returns></returns>
-        public ResponseDto<RestaurantDto> GetById(int idRestaurant)
+        public ResponseDto<RestaurantDto> GetById(string idRestaurant)
         {
             var Response = new ResponseDto<RestaurantDto>();
             var GetEntity = _restaurantRepository.GetById(idRestaurant);

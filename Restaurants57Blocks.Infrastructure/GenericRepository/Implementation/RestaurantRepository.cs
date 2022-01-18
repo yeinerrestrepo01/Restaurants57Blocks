@@ -54,9 +54,9 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
         /// </summary>
         /// <param name="idRestaurant"></param>
         /// <returns></returns>
-        public Restaurant GetById(int idRestaurant)
+        public Restaurant GetById(string idRestaurant)
         {
-            return _unitWork.Restaurant.FirstOrDefault(o => o.Id == idRestaurant);
+            return _unitWork.Restaurant.FirstOrDefault(o => o.Identifcation == idRestaurant);
         }
     }
 }

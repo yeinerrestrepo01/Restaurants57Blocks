@@ -8,7 +8,7 @@ namespace Restaurants57Blocks.Application
     public interface IRestaurantServices
     {
         List<RestaurantDto> GetAll();
-        ResponseDto<RestaurantDto> GetById(int idRestaurant);
+        ResponseDto<RestaurantDto> GetById(string idRestaurant);
         Task<ResponseDto<bool>> AddAsync(RestaurantRequest restaurant);
     }
 }

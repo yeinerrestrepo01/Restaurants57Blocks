@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Restaurants57Blocks.Application;
 using Restaurants57Blocks.Domain.Request;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -13,15 +10,18 @@ namespace Restaurants57Blocks.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RestaurantController : ControllerBase
+    public class EmployeeController : ControllerBase
     {
-        private readonly IRestaurantServices _restaurantServices;
+        private readonly IEmployeeServices _employeeServices;
 
-        public RestaurantController(IRestaurantServices restaurantServices)
+        public EmployeeController(IEmployeeServices employeeServices)
         {
-            _restaurantServices = restaurantServices;
+            _employeeServices = employeeServices;
         }
-        // GET: api/<RestaurantController>
+
+
+        // GET: api/<EmployeeeController>
+        [HttpGet]
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
@@ -29,39 +29,32 @@ namespace Restaurants57Blocks.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult Get()
         {
-            var Result = _restaurantServices.GetAll();
+            var Result = _employeeServices.GetAll();
             return Ok(Result);
         }
-
-        // GET api/<RestaurantController>/5
-        [HttpGet("{idRestaurant}")]
+        // GET api/<EmployeeeController>/5
+        [HttpGet("{identificacion}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public IActionResult Get(string idRestaurant)
+        public IActionResult Get(string identificacion)
         {
-            var Result = _restaurantServices.GetById(idRestaurant);
+            var Result = _employeeServices.GetById(identificacion);
             return StatusCode(Result.StatusCode, Result);
         }
 
-        // POST api/<RestaurantController>
+        // POST api/<EmployeeeController>
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<IActionResult> Post([FromBody] RestaurantRequest value)
+        public async Task<IActionResult> Post([FromBody] EmployeeRequest employee)
         {
-            var Result = await _restaurantServices.AddAsync(value);
+            var Result = await _employeeServices.AddAsync(employee);
             return StatusCode(Result.StatusCode, Result);
-        }
-
-        // PUT api/<RestaurantController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] RestaurantRequest value)
-        {
         }
     }
 }

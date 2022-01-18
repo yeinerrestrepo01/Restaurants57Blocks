@@ -15,6 +15,7 @@ namespace Restaurants57Blocks.Domain.FluentValidation
 
             RuleFor(employee => employee.FullName)
             .NotEmpty()
+            .WithMessage(Message.Not_Empty_FullName)
             .NotNull()
             .WithMessage(Message.Not_Empty_FullName);
 
@@ -31,6 +32,7 @@ namespace Restaurants57Blocks.Domain.FluentValidation
 
             RuleFor(employee => employee.RestaurantId)
              .NotEmpty()
+             .WithMessage(Message.Not_Empty_Address)
              .NotNull()
              .WithMessage(Message.Not_Empty_Address);
         }

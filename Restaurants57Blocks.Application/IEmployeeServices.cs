@@ -10,7 +10,7 @@ namespace Restaurants57Blocks.Application
     public interface IEmployeeServices
     {
         List<EmployeeDto> GetAll();
-        ResponseDto<EmployeeDto> GetById(int idEmployee);
+        ResponseDto<EmployeeDto> GetById(string idEmployee);
         Task<ResponseDto<bool>> AddAsync(EmployeeRequest employee);
     }
 }

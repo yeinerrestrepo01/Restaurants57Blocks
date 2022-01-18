@@ -9,7 +9,7 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository
     public interface IEmployeeRepository
     {
         List<Employee> GetAll();
-        Employee GetById(int idEmployee);
+        Employee GetById(string idEmployee);
         Task<int> AddAsync(Employee employee);
     }
 }

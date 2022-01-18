@@ -1,10 +1,8 @@
 ﻿using Restaurants57Blocks.Domain.Entities;
 using Restaurants57Blocks.Infrastructure.DBContext;
 using Restaurants57Blocks.Infrastructure.UnitOfWork;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
@@ -53,7 +51,7 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
         /// </summary>
         /// <param name="idRestaurant"></param>
         /// <returns></returns>
-        public Employee GetById(int idEmployee)
+        public Employee GetById(string idEmployee)
         {
             return _unitWork.Employee.FirstOrDefault(o => o.Identifcation == idEmployee);
         }

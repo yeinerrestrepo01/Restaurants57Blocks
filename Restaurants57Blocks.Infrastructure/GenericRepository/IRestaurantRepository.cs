@@ -7,7 +7,7 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository
     public interface IRestaurantRepository
     {
         List<Restaurant> GetAll();
-        Restaurant GetById(int idRestaurant);
+        Restaurant GetById(string idRestaurant);
         Task<int> AddAsync(Restaurant restaurant);
     }
 }
