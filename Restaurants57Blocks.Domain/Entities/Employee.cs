@@ -5,9 +5,10 @@ namespace Restaurants57Blocks.Domain.Entities
 {
     public partial class Employee
     {
-       
+
         [Key]
-        public int Identifcation { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Identication { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

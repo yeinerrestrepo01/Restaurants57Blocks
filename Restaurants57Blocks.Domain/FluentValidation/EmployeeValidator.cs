@@ -8,7 +8,7 @@ namespace Restaurants57Blocks.Domain.FluentValidation
     { 
         public EmployeeValidator()
         {
-               RuleFor(employee => employee.Identifcation)
+               RuleFor(employee => employee.Identification)
                .NotEmpty()
                .NotNull()
                .WithMessage(Message.Not_Empty_Identification);

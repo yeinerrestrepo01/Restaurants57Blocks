@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurants57Blocks.Infrastructure.DBContext;
 
 namespace Restaurants57Blocks.Infrastructure.Migrations
 {
     [DbContext(typeof(Restaurants57BlocksDBContext))]
-    partial class Restaurants57BlocksDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220118042552_Alter_Name_Column_Identification")]
+    partial class Alter_Name_Column_Identification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,8 +23,10 @@ namespace Restaurants57Blocks.Infrastructure.Migrations
 
             modelBuilder.Entity("Restaurants57Blocks.Domain.Entities.Employee", b =>
                 {
-                    b.Property<int>("Identication")
-                        .HasColumnType("int");
+                    b.Property<int>("Identification")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -42,7 +46,7 @@ namespace Restaurants57Blocks.Infrastructure.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("Identication");
+                    b.HasKey("Identification");
 
                     b.HasIndex("RestaurantId");
 

@@ -3,51 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurants57Blocks.Infrastructure.DBContext;
 
 namespace Restaurants57Blocks.Infrastructure.Migrations
 {
     [DbContext(typeof(Restaurants57BlocksDBContext))]
-    partial class Restaurants57BlocksDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220118044330_Drop_Table_Employee")]
+    partial class Drop_Table_Employee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Restaurants57Blocks.Domain.Entities.Employee", b =>
-                {
-                    b.Property<int>("Identication")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ResidenceAdress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RestaurantId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.HasKey("Identication");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.ToTable("Employee");
-                });
 
             modelBuilder.Entity("Restaurants57Blocks.Domain.Entities.Restaurant", b =>
                 {
@@ -101,29 +73,7 @@ namespace Restaurants57Blocks.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Restaurants57Blocks.Domain.Entities.Employee", b =>
-                {
-                    b.HasOne("Restaurants57Blocks.Domain.Entities.Restaurant", "RestaurantNavegation")
-                        .WithMany()
-                        .HasForeignKey("RestaurantId");
-
-                    b.Navigation("RestaurantNavegation");
-                });
-
-            modelBuilder.Entity("Restaurants57Blocks.Domain.Entities.User", b =>
-                {
-                    b.HasOne("Restaurants57Blocks.Domain.Entities.Employee", "EmployeeNavegation")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EmployeeNavegation");
                 });
 #pragma warning restore 612, 618
         }

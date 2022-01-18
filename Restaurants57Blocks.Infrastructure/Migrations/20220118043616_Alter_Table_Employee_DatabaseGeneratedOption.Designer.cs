@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurants57Blocks.Infrastructure.DBContext;
 
 namespace Restaurants57Blocks.Infrastructure.Migrations
 {
     [DbContext(typeof(Restaurants57BlocksDBContext))]
-    partial class Restaurants57BlocksDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220118043616_Alter_Table_Employee_DatabaseGeneratedOption")]
+    partial class Alter_Table_Employee_DatabaseGeneratedOption
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,7 @@ namespace Restaurants57Blocks.Infrastructure.Migrations
 
             modelBuilder.Entity("Restaurants57Blocks.Domain.Entities.Employee", b =>
                 {
-                    b.Property<int>("Identication")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -42,7 +44,7 @@ namespace Restaurants57Blocks.Infrastructure.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.HasKey("Identication");
+                    b.HasKey("Id");
 
                     b.HasIndex("RestaurantId");
 

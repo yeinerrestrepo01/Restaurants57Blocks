@@ -6,7 +6,7 @@ namespace Restaurants57Blocks.Domain.Request
 {
     public class EmployeeRequest
     {
-        public int Identifcation { get; set; }
+        public int Identification { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
