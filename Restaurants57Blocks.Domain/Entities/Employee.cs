@@ -8,7 +8,7 @@ namespace Restaurants57Blocks.Domain.Entities
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Identication { get; set; }
+        public int Identification { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
