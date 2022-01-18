@@ -3,6 +3,7 @@ using Restaurants57Blocks.Application.Validations;
 using Restaurants57Blocks.Common.Constants;
 using Restaurants57Blocks.Domain.Dto;
 using Restaurants57Blocks.Domain.Entities;
+using Restaurants57Blocks.Domain.FluentValidation;
 using Restaurants57Blocks.Domain.Request;
 using Restaurants57Blocks.Infrastructure.GenericRepository;
 using System.Collections.Generic;
@@ -20,6 +21,10 @@ namespace Restaurants57Blocks.Application.Implementation
         private readonly IEmployeeRepository _employeeRepository;
 
         private readonly RestaurantValidation _restaurantValitaions;
+
+        private  EmployeeValitaions _employeeValitaions;
+
+        private string _messageValidations;
 
         /// <summary>
         /// Inincializador de clase <class>RestaurantServices</class>
@@ -48,7 +53,7 @@ namespace Restaurants57Blocks.Application.Implementation
         public async Task<ResponseDto<bool>> AddAsync(EmployeeRequest employee)
         {
             var Response = new ResponseDto<bool>();
-            if (_restaurantValitaions.ExistsRestaurant(employee.RestaurantId, ref _restaurantValitaions._messageValidation))
+            if (ValidationRegister(employee))
             {
                 var employeeEntity = _mapper.Map<EmployeeRequest, Employee>(employee);
                 var ResultAddemployee = await _employeeRepository.AddAsync(employeeEntity);
@@ -68,7 +73,7 @@ namespace Restaurants57Blocks.Application.Implementation
             else
             {
                 Response.StatusCode = 202;
-                Response.Message = _restaurantValitaions._messageValidation;
+                Response.Message = _messageValidations;
                 Response.Data = false;
                 Response.IsSuccess = true;
             }
@@ -107,6 +112,29 @@ namespace Restaurants57Blocks.Application.Implementation
                 Response.Data = _mapper.Map<EmployeeDto>(GetEntity);
             }
             return Response;
+        }
+
+        /// <summary>
+        /// procesa las Validacion para poder realziar un registro de empleado
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
+        private bool ValidationRegister(EmployeeRequest employee) 
+        {
+            _employeeValitaions = new EmployeeValitaions(_employeeRepository);
+            var validationResult = true;
+            if (!_restaurantValitaions.ExistsRestaurant(employee.RestaurantId))
+            {
+                validationResult = false;
+                _messageValidations = Message.Not_Information_Restaurant;
+
+            }
+            else if(!_employeeValitaions.ExistsEegisterEmployee(employee))
+            {
+                validationResult = false;
+                _messageValidations += Message.Exists_Information_Employee;
+            }
+            return validationResult;
         }
     }
 }

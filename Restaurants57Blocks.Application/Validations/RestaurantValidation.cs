@@ -5,7 +5,6 @@ namespace Restaurants57Blocks.Application.Validations
 {
     public class RestaurantValidation
     {
-        public string _messageValidation;
         private readonly IRestaurantRepository _restaurantRepository;
         public RestaurantValidation(IRestaurantRepository restaurantRepository)
         {
@@ -18,14 +17,13 @@ namespace Restaurants57Blocks.Application.Validations
         /// <param name="employee"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public bool ExistsRestaurant(string idRestaurant, ref string message)
+        public bool ExistsRestaurant(string idRestaurant)
         {
             var resultValitaion = true;
             var queryResult = _restaurantRepository.GetById(idRestaurant);
             if (queryResult == null)
             {
                 resultValitaion = false;
-                message = Message.Not_Information_Restaurant;
             }
             return resultValitaion;
         }

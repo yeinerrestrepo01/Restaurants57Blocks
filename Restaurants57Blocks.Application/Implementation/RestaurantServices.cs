@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Restaurants57Blocks.Application.Validations;
 using Restaurants57Blocks.Common.Constants;
 using Restaurants57Blocks.Domain.Dto;
 using Restaurants57Blocks.Domain.Entities;
@@ -16,9 +17,14 @@ namespace Restaurants57Blocks.Application.Implementation
     /// </summary>
     public class RestaurantServices: IRestaurantServices
     {
+
+        private string _messageValidationsRestaurant;
+
         private readonly IMapper _mapper;
 
         private readonly IRestaurantRepository _restaurantRepository;
+
+        private  RestaurantValidation _restaurantValitaions;
 
         /// <summary>
         /// Inincializador de clase <class>RestaurantServices</class>
@@ -43,20 +49,33 @@ namespace Restaurants57Blocks.Application.Implementation
         /// <returns></returns>
         public async Task<ResponseDto<bool>> AddAsync(RestaurantRequest restaurant)
         {
-            var restaurantEntity = _mapper.Map<RestaurantRequest,Restaurant>(restaurant);
-            var ResultRestaurant = await _restaurantRepository.AddAsync(restaurantEntity);
             var Response = new ResponseDto<bool>();
-            if (ResultRestaurant.Equals(0))
+            if (!ValidationRegisterRestaurant(restaurant)) 
             {
-                Response.StatusCode = 202;
-                Response.Message = Message.Error_Proccess;
+                var restaurantEntity = _mapper.Map<RestaurantRequest, Restaurant>(restaurant);
+                var ResultRestaurant = await _restaurantRepository.AddAsync(restaurantEntity);
+                
+                if (ResultRestaurant.Equals(0))
+                {
+                    Response.StatusCode = 202;
+                    Response.Message = Message.Error_Proccess;
+                }
+                else
+                {
+                    Response.Message = Message.Successful_Register;
+                    Response.Data = true;
+                    Response.IsSuccess = true;
+                    Response.StatusCode = 200;
+                }
             }
             else
             {
-                Response.Message = Message.Successful_Register;
+                Response.StatusCode = 202;
+                Response.Message = _messageValidationsRestaurant;
                 Response.Data = true;
                 Response.IsSuccess = true;
             }
+            
             return Response;
         }
 
@@ -91,6 +110,23 @@ namespace Restaurants57Blocks.Application.Implementation
                 Response.Data = _mapper.Map<RestaurantDto>(GetEntity);
             }
             return Response;
+        }
+
+        private bool ValidationRegisterRestaurant(RestaurantRequest restaurant)
+        {
+            var validationResultRestaurant = true;
+            _restaurantValitaions = new RestaurantValidation(_restaurantRepository);
+            if (!_restaurantValitaions.ExistsRestaurant(restaurant.Identifcation))
+            {
+                validationResultRestaurant = false;
+                _messageValidationsRestaurant = Message.Not_Information_Restaurant;
+
+            }
+            else
+            {
+                _messageValidationsRestaurant = Message.Exists_Information_Restaurant;
+            }
+            return validationResultRestaurant;
         }
     }
 }

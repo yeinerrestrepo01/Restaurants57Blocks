@@ -32,5 +32,11 @@ namespace Restaurants57Blocks.Common.Constants
 
         public const string Not_Information_Restaurant = "No existe informacion relacionada con restaurante ingresado";
 
+        public const string Exists_Information_Restaurant = "Existe registrado un restaurante con el mismo numero de identificacin ingresado";
+
+        public const string Not_Information_Employee = "No existe informacion relacionada con Empleado ingresado";
+
+        public const string Exists_Information_Employee = "Existe un Empleado registrado con el numero de Identificacion ingresado";
+
     }
 }

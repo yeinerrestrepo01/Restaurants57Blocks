@@ -5,12 +5,10 @@ namespace Restaurants57Blocks.Application.Validations
 {
     public class EmployeeValitaions
     {
-
-        protected string _messageValidation;
-        private readonly IRestaurantRepository _restaurantRepository;
-        public EmployeeValitaions(IRestaurantRepository restaurantRepository)
+        private readonly IEmployeeRepository _employeeRepository;
+        public EmployeeValitaions(IEmployeeRepository employeeRepository)
         {
-            _restaurantRepository = restaurantRepository;
+            _employeeRepository = employeeRepository;
         }
 
         /// <summary>
@@ -19,14 +17,13 @@ namespace Restaurants57Blocks.Application.Validations
         /// <param name="employee"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        protected bool ExistsEmployee(EmployeeRequest employee, ref string message)
+        public bool ExistsEegisterEmployee(EmployeeRequest employee)
         {
             var resultValitaion = true;
-            var queryResult = _restaurantRepository.GetById(employee.RestaurantId);
+            var queryResult = _employeeRepository.GetById(employee.Identification);
             if (queryResult != null)
             {
                 resultValitaion = false;
-                message = Message.Not_Information_Restaurant;
             }
             return resultValitaion;
         }
