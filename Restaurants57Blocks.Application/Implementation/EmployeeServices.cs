@@ -53,7 +53,7 @@ namespace Restaurants57Blocks.Application.Implementation
         public async Task<ResponseDto<bool>> AddAsync(EmployeeRequest employee)
         {
             var Response = new ResponseDto<bool>();
-            if (ValidationRegister(employee))
+            if (ValidationRegister(employee.RestaurantId,employee.Identification))
             {
                 var employeeEntity = _mapper.Map<EmployeeRequest, Employee>(employee);
                 var ResultAddemployee = await _employeeRepository.AddAsync(employeeEntity);
@@ -119,17 +119,17 @@ namespace Restaurants57Blocks.Application.Implementation
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        private bool ValidationRegister(EmployeeRequest employee) 
+        public bool ValidationRegister(string restaurantId, int identification) 
         {
             _employeeValitaions = new EmployeeValitaions(_employeeRepository);
             var validationResult = true;
-            if (!_restaurantValitaions.ExistsRestaurant(employee.RestaurantId))
+            if (!_restaurantValitaions.ExistsRestaurant(restaurantId))
             {
                 validationResult = false;
                 _messageValidations = Message.Not_Information_Restaurant;
 
             }
-            else if(!_employeeValitaions.ExistsEegisterEmployee(employee))
+            else if(!_employeeValitaions.ExistsEegisterEmployee(identification))
             {
                 validationResult = false;
                 _messageValidations += Message.Exists_Information_Employee;

@@ -17,10 +17,10 @@ namespace Restaurants57Blocks.Application.Validations
         /// <param name="employee"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public bool ExistsEegisterEmployee(EmployeeRequest employee)
+        public bool ExistsEegisterEmployee(int identification)
         {
             var resultValitaion = true;
-            var queryResult = _employeeRepository.GetById(employee.Identification);
+            var queryResult = _employeeRepository.GetById(identification);
             if (queryResult != null)
             {
                 resultValitaion = false;

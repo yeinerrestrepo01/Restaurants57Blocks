@@ -30,7 +30,6 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
             await _unitWork.User.InsertAsync(user);
             return await _unitWork.SaveAsync();
         }
-
         public List<User> GetAll()
         {
             return _unitWork.User.AsQueryable().ToList();
@@ -39,6 +38,11 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
         public User GetById(int idUser)
         {
             return _unitWork.User.FirstOrDefault(o => o.Id == idUser);
+        }
+
+        public User ExistsEmail(string email)
+        {
+            return _unitWork.User.FirstOrDefault(o => o.Email == email);
         }
     }
 }

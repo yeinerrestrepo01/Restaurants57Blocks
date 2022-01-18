@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
 using Restaurants57Blocks.Common.Constants;
 using Restaurants57Blocks.Domain.Request;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Restaurants57Blocks.Domain.FluentValidation
 {
@@ -11,10 +8,6 @@ namespace Restaurants57Blocks.Domain.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(user => user.FullName)
-            .NotEmpty()
-            .WithMessage(Message.Not_Empty_FullName);
-
             RuleFor(user => user.Password)
              .Matches(RegularExpressions.Password)
              .WithMessage(Message.Format_Invalid_Password);
@@ -24,6 +17,11 @@ namespace Restaurants57Blocks.Domain.FluentValidation
                 .WithMessage(Message.Format_Invalid_Email)
                 .NotEmpty().WithMessage(Message.Not_Empty_Email)
                 .NotNull();
+
+            RuleFor(user => user.EmployeeId)
+            .NotEmpty()
+            .NotNull();
+
         }
     }
 }

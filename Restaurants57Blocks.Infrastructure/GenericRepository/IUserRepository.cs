@@ -10,6 +10,7 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository
     {
         List<User> GetAll();
         User GetById(int idUser);
+        User ExistsEmail(string email);
         Task<int> AddAsync(User user);
     }
 }

@@ -22,7 +22,6 @@ namespace Restaurants57Blocks.Api.Controllers
 
         // GET: api/<EmployeeeController>
         [HttpGet]
-        [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]

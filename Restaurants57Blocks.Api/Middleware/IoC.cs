@@ -30,6 +30,7 @@ namespace Restaurants57Blocks.Api.Middleware
             #region Services
             services.AddTransient<IRestaurantServices, RestaurantServices>();
             services.AddTransient<IEmployeeServices, EmployeeServices>();
+            services.AddTransient<IUserServices, UserServices>();
             #endregion
 
             #region Repository

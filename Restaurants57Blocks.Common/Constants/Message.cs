@@ -38,5 +38,7 @@ namespace Restaurants57Blocks.Common.Constants
 
         public const string Exists_Information_Employee = "Existe un Empleado registrado con el numero de Identificacion ingresado";
 
+        public const string Exists_Email = "Existe un usuario registrado con el mismo  Email ingresado";
+
     }
 }
