@@ -6,7 +6,7 @@ namespace Restaurants57Blocks.Domain.Entities
     public class Employee
     {
         [Key]
-        public int Id { get; set; }
+        public int Identifcation { get; set; }
         public string FullName { get; set; }
         public string Phone { get; set; }
         public string ResidenceAdress { get; set; }

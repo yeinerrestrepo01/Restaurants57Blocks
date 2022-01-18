@@ -55,7 +55,7 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
         /// <returns></returns>
         public Employee GetById(int idEmployee)
         {
-            return _unitWork.Employee.FirstOrDefault(o => o.Id == idEmployee);
+            return _unitWork.Employee.FirstOrDefault(o => o.Identifcation == idEmployee);
         }
     }
 }

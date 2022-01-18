@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurants57Blocks.Infrastructure.DBContext;
 
 namespace Restaurants57Blocks.Infrastructure.Migrations
 {
     [DbContext(typeof(Restaurants57BlocksDBContext))]
-    partial class Restaurants57BlocksDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220117163341_Add-FK_Employee_User")]
+    partial class AddFK_Employee_User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

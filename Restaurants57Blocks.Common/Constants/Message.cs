@@ -16,9 +16,11 @@ namespace Restaurants57Blocks.Common.Constants
 
         public const string Not_Empty_Name = "El campo Name no puede ser nulo o vacio";
 
-        public const string Not_Empty_Address = "El campo Address = no puede ser nulo o vacio";
+        public const string Not_Empty_Address = "El campo Address  no puede ser nulo o vacio";
 
-        public const string Not_Empty_Identification = "El campo Identification = no puede ser nulo o vacio";
+        public const string Not_Empty_RestaurantId = "El campo RestaurantId  no puede ser nulo o vacio";
+
+        public const string Not_Empty_Identification = "El campo Identification  no puede ser nulo o vacio";
 
         public const string Successful_Register  = "Registro realizado exitosamente";
 

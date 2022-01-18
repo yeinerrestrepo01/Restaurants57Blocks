@@ -34,11 +34,13 @@ namespace Restaurants57Blocks.Api.Middleware
             #region Repository
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRestaurantRepository, RestaurantRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             #endregion
 
             #region FluentValidator
             services.AddSingleton<IValidator<UserRequest>, UserValidator>();
             services.AddSingleton<IValidator<RestaurantRequest>, RestaurantValidator>();
+            services.AddSingleton<IValidator<EmployeeRequest>, EmployeeValidator>();
 
             #endregion
 
