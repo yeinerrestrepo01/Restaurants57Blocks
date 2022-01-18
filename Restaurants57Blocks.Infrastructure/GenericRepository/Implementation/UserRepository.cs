@@ -1,4 +1,6 @@
-﻿using Restaurants57Blocks.Domain.Entities;
+﻿using Restaurants57Blocks.Domain.Dto;
+using Restaurants57Blocks.Domain.Entities;
+using Restaurants57Blocks.Domain.Request;
 using Restaurants57Blocks.Infrastructure.DBContext;
 using Restaurants57Blocks.Infrastructure.UnitOfWork;
 using System;
@@ -43,6 +45,22 @@ namespace Restaurants57Blocks.Infrastructure.GenericRepository.Implementation
         public User ExistsEmail(string email)
         {
             return _unitWork.User.FirstOrDefault(o => o.Email == email);
+        }
+
+        public UserLoginDto LoginUsuario(LoginRequest login)
+        {
+           var queryLoginUser = _unitWork.User.AsQueryable()
+                .Where(o => o.Email == login.Email && o.Password == login.Password)
+                .Select(t=> new UserLoginDto
+                  {
+                    Email = t.Email,
+                    EmployeeId = t.EmployeeId,
+                    EmployeeName = t.EmployeeNavegation.FullName,
+                    RestaurantId = t.EmployeeNavegation.RestaurantNavegation.Identifcation,
+                    RestaurantName = t.EmployeeNavegation.RestaurantNavegation.Name,
+                  }).FirstOrDefault();
+
+            return queryLoginUser;
         }
     }
 }

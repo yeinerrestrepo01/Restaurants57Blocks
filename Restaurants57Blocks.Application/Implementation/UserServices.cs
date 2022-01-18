@@ -46,7 +46,7 @@ namespace Restaurants57Blocks.Application.Implementation
         }
 
         /// <summary>
-        /// 
+        ///  inserta el registro de usuario
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -82,7 +82,7 @@ namespace Restaurants57Blocks.Application.Implementation
         }
 
         /// <summary>
-        /// 
+        ///  trae el lisatado de usuarios creados
         /// </summary>
         /// <returns></returns>
         public List<UserDto> GetAll()
@@ -92,7 +92,7 @@ namespace Restaurants57Blocks.Application.Implementation
         }
 
         /// <summary>
-        /// 
+        /// busca un usuario en especifico
         /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
@@ -113,6 +113,38 @@ namespace Restaurants57Blocks.Application.Implementation
             }
             return Response;
         }
+
+        /// <summary>
+        /// Valida la informacion para el proceso de login
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+
+        public ResponseDto<UserLoginDto> LoginUsuario(LoginRequest login)
+        {
+            var Response = new ResponseDto<UserLoginDto>();
+            login.Password = SecurityManager.EncryptSHA512(login.Password);
+            var GetEntity = _userRepository.LoginUsuario(login);
+            if (GetEntity == null)
+            {
+                Response.Message = Message.Login_Error;
+                Response.StatusCode = 202;
+            }
+            else
+            {
+                Response.Message = Message.Login_Successful;
+                Response.IsSuccess = true;
+                Response.Data = GetEntity;
+            }
+            return Response;
+        }
+
+        /// <summary>
+        /// Validaciones para procesar registros
+        /// </summary>
+        /// <param name="employeeId"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         private bool ValidationRegisterUser(int employeeId, string email)
         {
             var resultValidationUser = true;

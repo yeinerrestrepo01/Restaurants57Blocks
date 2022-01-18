@@ -12,5 +12,6 @@ namespace Restaurants57Blocks.Application
         List<UserDto> GetAll();
         ResponseDto<UserDto> GetById(int idUser);
         Task<ResponseDto<bool>> AddAsync(UserRequest user);
+        ResponseDto<UserLoginDto> LoginUsuario(LoginRequest login);
     }
 }

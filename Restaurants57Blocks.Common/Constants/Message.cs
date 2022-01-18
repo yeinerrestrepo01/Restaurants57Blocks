@@ -40,5 +40,9 @@ namespace Restaurants57Blocks.Common.Constants
 
         public const string Exists_Email = "Existe un usuario registrado con el mismo  Email ingresado";
 
+        public const string Login_Error = "usuario o contrasela invalide, valide los datos e intente nuevamente";
+
+        public const string Login_Successful = "Lgin relizado exitosamente";
+
     }
 }

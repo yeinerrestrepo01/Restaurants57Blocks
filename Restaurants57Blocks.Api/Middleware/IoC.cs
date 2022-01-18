@@ -43,6 +43,7 @@ namespace Restaurants57Blocks.Api.Middleware
             services.AddSingleton<IValidator<UserRequest>, UserValidator>();
             services.AddSingleton<IValidator<RestaurantRequest>, RestaurantValidator>();
             services.AddSingleton<IValidator<EmployeeRequest>, EmployeeValidator>();
+            services.AddSingleton<IValidator<LoginRequest>, LoginValidator>();
 
             #endregion
 
