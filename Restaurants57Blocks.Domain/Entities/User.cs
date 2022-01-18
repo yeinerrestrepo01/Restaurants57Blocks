@@ -17,9 +17,9 @@ namespace Restaurants57Blocks.Domain.Entities
         public string Password { get; set; }
         public DateTime DateRegister { get; set; }
         public bool Status { get; set; } = true;
-        public string IdEmployye { get; set; }
+        public int EmployeeId { get; set; }
 
-        [ForeignKey("Identifcation")]
+        [ForeignKey("EmployeeId")]
         public virtual Employee EmployeeNavegation { get; set; }
     }
 }

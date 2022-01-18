@@ -39,7 +39,7 @@ namespace Restaurants57Blocks.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
-        public IActionResult Get(string identificacion)
+        public IActionResult Get(int identificacion)
         {
             var Result = _employeeServices.GetById(identificacion);
             return StatusCode(Result.StatusCode, Result);

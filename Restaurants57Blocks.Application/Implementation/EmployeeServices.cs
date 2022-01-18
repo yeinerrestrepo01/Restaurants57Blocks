@@ -91,7 +91,7 @@ namespace Restaurants57Blocks.Application.Implementation
         /// </summary>
         /// <param name="idEmployee"></param>
         /// <returns></returns>
-        public ResponseDto<EmployeeDto> GetById(string idEmployee)
+        public ResponseDto<EmployeeDto> GetById(int idEmployee)
         {
             var Response = new ResponseDto<EmployeeDto>();
             var GetEntity = _employeeRepository.GetById(idEmployee);
