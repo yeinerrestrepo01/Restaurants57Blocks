@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Restaurants57Blocks.Api.Middleware;
 using Restaurants57Blocks.Infrastructure.DBContext;
+using Restaurants57Blocks.Infrastructure.ProviderCache;
 using System;
 
 namespace Restaurants57Blocks.Api
@@ -39,6 +41,7 @@ namespace Restaurants57Blocks.Api
             #region Register (dependency injection)
             IoC.AddDependency(services);
             #endregion
+            services.AddMemoryCache();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             // Configuración FluentValidator

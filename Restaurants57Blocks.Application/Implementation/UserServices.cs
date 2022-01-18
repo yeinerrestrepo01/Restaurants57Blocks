@@ -6,6 +6,7 @@ using Restaurants57Blocks.Domain.Dto;
 using Restaurants57Blocks.Domain.Entities;
 using Restaurants57Blocks.Domain.Request;
 using Restaurants57Blocks.Infrastructure.GenericRepository;
+using Restaurants57Blocks.Infrastructure.ProviderCache;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Restaurants57Blocks.Application.Implementation
         private EmployeeValitaions _validationEmployee;
 
         private string  _messageValidationUser;
+
+        private readonly MemoryCacheProvider _provedieCache;
 
         /// <summary>
         /// Inincializador de clase <class>UserServices</class>
@@ -43,6 +46,7 @@ namespace Restaurants57Blocks.Application.Implementation
                 _ = cfg.CreateMap<User, UserDto>();
             });
             _mapper = config.CreateMapper();
+            _provedieCache = MemoryCacheProvider.Instance();
         }
 
         /// <summary>
@@ -132,6 +136,9 @@ namespace Restaurants57Blocks.Application.Implementation
             }
             else
             {
+                var KeyCache = Guid.NewGuid();
+                _provedieCache.SetCahe(KeyCache.ToString(), GetEntity);
+                GetEntity.Token = KeyCache.ToString();
                 Response.Message = Message.Login_Successful;
                 Response.IsSuccess = true;
                 Response.Data = GetEntity;

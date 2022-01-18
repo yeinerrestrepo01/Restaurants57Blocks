@@ -7,6 +7,7 @@
         public string Email { get; set; }
         public string RestaurantId { get; set; }
         public string RestaurantName { get; set; }
+        public string Token { get; set; }
     }
 }
 

@@ -42,7 +42,11 @@ namespace Restaurants57Blocks.Common.Constants
 
         public const string Login_Error = "usuario o contrasela invalide, valide los datos e intente nuevamente";
 
-        public const string Login_Successful = "Lgin relizado exitosamente";
+        public const string Login_Successful = "Login relizado exitosamente";
+
+        public const string Error_Token = "Se ha ingresado un toke no valido";
+
+        public const string Not_Access = "No tiene acceso para ver la informacion solicitada";
 
     }
 }

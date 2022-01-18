@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Restaurants57Blocks.Api.Middleware;
 using Restaurants57Blocks.Application;
 using Restaurants57Blocks.Domain.Request;
 using System;
@@ -29,8 +31,9 @@ namespace Restaurants57Blocks.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult Get()
         {
-            var Result = _restaurantServices.GetAll();
-            return Ok(Result);
+            HttpContext.Request.Headers.TryGetValue("Token", out var traceValue);
+            var Result = _restaurantServices.GetAll(traceValue.ToString());
+            return StatusCode(Result.StatusCode, Result);
         }
 
         // GET api/<RestaurantController>/5
@@ -42,7 +45,8 @@ namespace Restaurants57Blocks.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public IActionResult Get(string idRestaurant)
         {
-            var Result = _restaurantServices.GetById(idRestaurant);
+            HttpContext.Request.Headers.TryGetValue("Token", out var traceValue);
+            var Result = _restaurantServices.GetById(idRestaurant, traceValue);
             return StatusCode(Result.StatusCode, Result);
         }
 

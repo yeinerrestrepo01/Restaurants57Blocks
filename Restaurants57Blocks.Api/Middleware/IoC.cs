@@ -6,6 +6,7 @@ using Restaurants57Blocks.Domain.FluentValidation;
 using Restaurants57Blocks.Domain.Request;
 using Restaurants57Blocks.Infrastructure.GenericRepository;
 using Restaurants57Blocks.Infrastructure.GenericRepository.Implementation;
+using Restaurants57Blocks.Infrastructure.ProviderCache;
 using Restaurants57Blocks.Infrastructure.Repository;
 using Restaurants57Blocks.Infrastructure.UnitOfWork;
 
@@ -44,7 +45,6 @@ namespace Restaurants57Blocks.Api.Middleware
             services.AddSingleton<IValidator<RestaurantRequest>, RestaurantValidator>();
             services.AddSingleton<IValidator<EmployeeRequest>, EmployeeValidator>();
             services.AddSingleton<IValidator<LoginRequest>, LoginValidator>();
-
             #endregion
 
             return services;
