@@ -26,10 +26,6 @@ namespace Restaurants57Blocks.Infrastructure.DBContext
         public virtual DbSet<Employee> Employee { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=LAPTOP-K991GUOR;Database=Restaurants57Blocks;Trusted_Connection=False;User=sa;password=Complemento$0912;");
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
