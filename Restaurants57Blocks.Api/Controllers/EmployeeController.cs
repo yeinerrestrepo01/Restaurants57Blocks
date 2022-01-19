@@ -28,7 +28,8 @@ namespace Restaurants57Blocks.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public IActionResult Get()
         {
-            var Result = _employeeServices.GetAll();
+            HttpContext.Request.Headers.TryGetValue("Token", out var traceValue);
+            var Result = _employeeServices.GetAll(traceValue);
             return Ok(Result);
         }
         // GET api/<EmployeeeController>/5
@@ -40,7 +41,8 @@ namespace Restaurants57Blocks.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public IActionResult Get(int identificacion)
         {
-            var Result = _employeeServices.GetById(identificacion);
+            HttpContext.Request.Headers.TryGetValue("Token", out var traceValue);
+            var Result = _employeeServices.GetById(identificacion, traceValue);
             return StatusCode(Result.StatusCode, Result);
         }
 

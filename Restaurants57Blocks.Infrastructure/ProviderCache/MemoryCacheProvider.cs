@@ -55,7 +55,7 @@ namespace Restaurants57Blocks.Infrastructure.ProviderCache
         /// <returns></returns>
         public object GetCache(string key) 
         {
-            return _memoryCacheCache.Get(key);
+            return  _memoryCacheCache.Get(key);
         }
     }
 }

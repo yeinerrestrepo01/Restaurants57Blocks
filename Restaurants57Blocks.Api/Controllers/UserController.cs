@@ -56,10 +56,5 @@ namespace Restaurants57Blocks.Api.Controllers
             return StatusCode(Result.StatusCode, Result);
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
     }
 }

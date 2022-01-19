@@ -179,14 +179,14 @@ namespace Restaurants57Blocks.Application.Implementation
         /// <returns></returns>
         private bool Validationauthorization(string tokenTransacction, string restaurantId)
         {
-            _informactiosesion = _provedieCache.GetCache(tokenTransacction);
+            _informactiosesion = tokenTransacction != null?_provedieCache.GetCache(tokenTransacction):null;
             var resultValidationauthorization = true;
-            if (_informactiosesion != null && !string.IsNullOrEmpty(restaurantId))
+            if (_informactiosesion != null)
             {
                 var ojectUsersesionValidation = (UserLoginDto)_informactiosesion;
                 var validationRestaurant = _employeeRepository.GetAll().Where(e => e.Identification == ojectUsersesionValidation.EmployeeId
                 && e.RestaurantId == restaurantId).FirstOrDefault();
-                if (validationRestaurant == null)
+                if (validationRestaurant == null && !string.IsNullOrEmpty(restaurantId))
                 {
                     _messageValidationAuthorization = Message.Not_Access;
                     resultValidationauthorization = false;

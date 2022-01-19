@@ -3,10 +3,11 @@ using Restaurants57Blocks.Application.Validations;
 using Restaurants57Blocks.Common.Constants;
 using Restaurants57Blocks.Domain.Dto;
 using Restaurants57Blocks.Domain.Entities;
-using Restaurants57Blocks.Domain.FluentValidation;
 using Restaurants57Blocks.Domain.Request;
 using Restaurants57Blocks.Infrastructure.GenericRepository;
+using Restaurants57Blocks.Infrastructure.ProviderCache;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Restaurants57Blocks.Application.Implementation
@@ -26,6 +27,12 @@ namespace Restaurants57Blocks.Application.Implementation
 
         private string _messageValidations;
 
+        private string _messageValidationAuthorization;
+
+        private readonly MemoryCacheProvider _provedieCache;
+
+        private object _informatiosesion;
+
         /// <summary>
         /// Inincializador de clase <class>RestaurantServices</class>
         /// </summary>
@@ -43,6 +50,7 @@ namespace Restaurants57Blocks.Application.Implementation
                 _ = cfg.CreateMap<Employee, EmployeeDto>();
             });
             _mapper = config.CreateMapper();
+            _provedieCache = MemoryCacheProvider.Instance();
         }
 
         /// <summary>
@@ -85,10 +93,25 @@ namespace Restaurants57Blocks.Application.Implementation
         /// Realiza la busqueda de todos los Employee creados
         /// </summary>
         /// <returns></returns>
-        public List<EmployeeDto> GetAll()
+        public ResponseDto<List<EmployeeDto>> GetAll(string tokenAcceso)
         {
-            var ResulQuery = _employeeRepository.GetAll();
-            return _mapper.Map<List<EmployeeDto>>(ResulQuery);
+            var resulutQueryAll = new ResponseDto<List<EmployeeDto>>();
+            if (!ValidationAuthorization(tokenAcceso,0))
+            {
+                resulutQueryAll.Message = _messageValidationAuthorization;
+                resulutQueryAll.StatusCode = 401;
+            }
+            else
+            {
+                var ojectUsersesion = (UserLoginDto)_informatiosesion;
+                var ResulQuery = _employeeRepository.GetAll().Where(e=> e.RestaurantId == ojectUsersesion.RestaurantId);
+                resulutQueryAll.IsSuccess = true;
+                resulutQueryAll.StatusCode = 200;
+                resulutQueryAll.Message = Message.Successful_Query;
+                resulutQueryAll.Data =_mapper.Map<List<EmployeeDto>>(ResulQuery);
+            }
+
+            return resulutQueryAll;
         }
 
         /// <summary>
@@ -96,20 +119,22 @@ namespace Restaurants57Blocks.Application.Implementation
         /// </summary>
         /// <param name="idEmployee"></param>
         /// <returns></returns>
-        public ResponseDto<EmployeeDto> GetById(int idEmployee)
+        public ResponseDto<EmployeeDto> GetById(int idEmployee, string tokenAcceso)
         {
             var Response = new ResponseDto<EmployeeDto>();
-            var GetEntity = _employeeRepository.GetById(idEmployee);
-            if (GetEntity == null)
+            
+            if (!ValidationAuthorization(tokenAcceso, idEmployee))
             {
-                Response.Message = Message.Not_Information;
-                Response.StatusCode = 204;
+                Response.Message = _messageValidationAuthorization;
+                Response.StatusCode = 401;
             }
             else
             {
+                var GetEntity = _employeeRepository.GetById(idEmployee);
                 Response.Message = Message.Successful_Query;
                 Response.IsSuccess = true;
                 Response.Data = _mapper.Map<EmployeeDto>(GetEntity);
+
             }
             return Response;
         }
@@ -135,6 +160,31 @@ namespace Restaurants57Blocks.Application.Implementation
                 _messageValidations += Message.Exists_Information_Employee;
             }
             return validationResult;
+        }
+
+        private bool ValidationAuthorization(string tokenAcceso, int idEmployee)
+        {
+            var resultAuthorization = true;
+            _informatiosesion = tokenAcceso !=null?_provedieCache.GetCache(tokenAcceso):null;
+            if (_informatiosesion != null)
+            {
+                var ojectUserAuthorization = (UserLoginDto)_informatiosesion;
+                var userAuthorization =_employeeRepository.GetAll().Where(e => e.Identification == idEmployee && 
+                            e.RestaurantId == ojectUserAuthorization.RestaurantId).FirstOrDefault();
+
+                if (userAuthorization == null && idEmployee > 0)
+                {
+                    _messageValidationAuthorization = Message.Not_Access;
+                    resultAuthorization = false;
+                }
+            }
+            else
+            {
+                resultAuthorization = false;
+                _messageValidationAuthorization = Message.Error_Token;
+            }
+
+            return resultAuthorization;
         }
     }
 }

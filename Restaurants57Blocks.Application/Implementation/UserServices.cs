@@ -21,7 +21,7 @@ namespace Restaurants57Blocks.Application.Implementation
 
         private readonly IUserRepository _userRepository;
 
-        private EmployeeValitaions _validationEmployee;
+        private readonly EmployeeValitaions _validationEmployee;
 
         private string  _messageValidationUser;
 
