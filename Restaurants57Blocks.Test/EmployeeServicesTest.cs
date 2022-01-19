@@ -40,7 +40,7 @@ namespace Restaurants57Blocks.Test
         {
             // Arrange
             var service = this.CreateService();
-            var result = service.GetAll("aaaaaaaaaaaaaaa");
+            var result = service.GetAll("76658140-6fdb-42f7-a40f-0d475374ca78");
             Assert.AreEqual(result.StatusCode, 401);
         }
 
@@ -118,14 +118,13 @@ namespace Restaurants57Blocks.Test
 
             this.mockRestaurantRepository.Setup(s => s.GetById("4757588")).Returns(dbRestaurant);
 
-            this.mockEmployeeRepository.Setup(s => s.GetById(1065635832)).Returns(dbEmployee);
+            this.mockEmployeeRepository.Setup(s => s.GetById(It.IsAny<int>())).Returns(new Employee());
 
             this.mockEmployeeRepository.Setup(s => s.AddAsync(It.IsAny<Employee>())).ReturnsAsync(1);
             // Arrange
             var service = this.CreateService();
             var result = await service.AddAsync(employeeRequest);
             Assert.AreEqual(result.StatusCode, 202);
-            this.mockRepository.VerifyAll();
         }
 
 
