@@ -18,5 +18,5 @@ Para rezlizar la ejeucion del proyecto:
 3- se debe ejecutar la actualziacion de las migracion en la base de datos, esto se hace con el comando "update-database",
 esta ejecucion se debe realizar apuntando al proyecto de "Restaurants57Blocks.Infrastructure"
 
-4- una vez se realicen estos pasos se encuentra la aplicacion lista para ser urilziada.
+4- una vez se realicen estos pasos se encuentra la aplicacion lista para ser utilizada.
 
